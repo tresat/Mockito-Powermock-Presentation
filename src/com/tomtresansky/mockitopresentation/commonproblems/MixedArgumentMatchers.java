@@ -1,10 +1,7 @@
 package com.tomtresansky.mockitopresentation.commonproblems;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -66,7 +63,7 @@ public class MixedArgumentMatchers {
     Assert.assertEquals(puppies, mockBreeder.breed(spot1, fluffy, 2));
     Assert.assertEquals(puppies, mockBreeder.breed(spot2, fluffy, 7));
 
-    // Now det up a mock using a mix of values and argument matchers: ANY DOG NAMED SPOT + ANY OTHER DOG and 2 PUPPIES
+    // Now set up a mock using a mix of values and argument matchers: ANY DOG NAMED SPOT + ANY OTHER DOG and 2 PUPPIES
     when(mockBreeder.breed(eq(new Dog("Spot", null)), any(Dog.class), 2)).thenReturn(puppies); // <----- FAILS with InvalidUseOfMatchersException
 
     /*
