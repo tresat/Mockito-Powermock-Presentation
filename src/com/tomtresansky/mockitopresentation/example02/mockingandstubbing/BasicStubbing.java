@@ -56,7 +56,8 @@ public class BasicStubbing {
   @Test
   public void testStubbingMultipleInvocations() {
     // Say we want to stub repeated calls to the same method: each returning different results
-    final Stack mockStack = mock(Stack.class);
+    @SuppressWarnings("unchecked")
+    final Stack<String> mockStack = mock(Stack.class);
 
     // Naive approach:
     when(mockStack.pop()).thenReturn("head");
@@ -73,7 +74,8 @@ public class BasicStubbing {
     // Mockito only remembers LAST stubbed result...so how to mock a Stack keeping to AAA?
 
     // Let's try again...
-    final Stack mockStack2 = mock(Stack.class);
+    @SuppressWarnings("unchecked")
+    final Stack<String> mockStack2 = mock(Stack.class);
 
     // Var-args call to then return tells mockito to keep track of various results
     when(mockStack2.pop()).thenReturn("head", "neck", "shoulders", "chest");

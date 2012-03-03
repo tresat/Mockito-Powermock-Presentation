@@ -66,10 +66,12 @@ public class CornerCases {
   }
 }
 
+@SuppressWarnings("serial")
 class UnfueledException extends RuntimeException {
   // left blank
 };
 
+@SuppressWarnings("serial")
 class ExplodeException extends RuntimeException {
   // left blank
 };

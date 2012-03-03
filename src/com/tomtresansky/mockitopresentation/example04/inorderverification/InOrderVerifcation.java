@@ -70,6 +70,7 @@ public class InOrderVerifcation {
     //warehouseOrdering.verify(mockWarehouse2).stock("apples");
   }
 
+  @SuppressWarnings("serial")
   class OutOfStockException extends RuntimeException {
     // left blank
   }

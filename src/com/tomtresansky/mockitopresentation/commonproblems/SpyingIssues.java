@@ -11,7 +11,7 @@ public class SpyingIssues {
   @Test
   public void testSpyStubbing() {
     // Spy on an ArrayList
-    final List spyList = spy(new ArrayList());
+    final List<String> spyList = spy(new ArrayList<String>());
 
     // Because mockito uses method calls as interactions to specify stubbing, if we try to mock a get call on a SPY
     // We're actually calling the method...
@@ -21,9 +21,9 @@ public class SpyingIssues {
   }
 
   @Test
-  public void testSpyStubbing2() {
+  public void testSpyStubbingCorrected() {
     // Spy on an ArrayList
-    final List spyList = spy(new ArrayList());
+    final List<String> spyList = spy(new ArrayList<String>());
 
     // More convoluted syntax can accomplish our goals, see javadoc for doReturn method...
     doReturn("monkey").when(spyList).get(0);

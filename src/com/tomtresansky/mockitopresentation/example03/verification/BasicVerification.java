@@ -118,6 +118,7 @@ public class BasicVerification {
     verifyNoMoreInteractions(mockBeefWarehouse);
   }
 
+  @SuppressWarnings("serial")
   class OutOfStockException extends RuntimeException {
     // left blank
   }
