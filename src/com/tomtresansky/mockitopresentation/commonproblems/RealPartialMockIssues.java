@@ -10,6 +10,28 @@ import org.junit.Test;
 
 public class RealPartialMockIssues {
   @Test
+  public void testRealPartialMockWithoutImpl() {
+    // NOTE: we're mocking the List interface here
+    @SuppressWarnings("unchecked")
+    final List<String> partialMockList = mock(List.class);
+
+    // Try to use partial mocking to call the real size() implementation
+    when(partialMockList.size()).thenCallRealMethod(); // ERROR
+
+    /*
+     * Fails, as it should, since there is no implementation of .size() in the
+     * INTERFACE to call!
+     * 
+     * Helpful exception:
+     * org.mockito.exceptions.base.MockitoException: Cannot call real method on java interface. 
+     * Interface does not have any implementation! 
+     * Calling real methods is only possible when mocking concrete classes.
+     * //correct example:
+     * when(mockOfConcreteClass.doStuff()).thenCallRealMethod();
+     */
+  }
+
+  @Test
   public void testRealPartialMock() {
     /*
      * Here we set up a parial mock using the the call read method syntax.
