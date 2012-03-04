@@ -1,7 +1,6 @@
 package com.tomtresansky.mockitopresentation.commonproblems;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
@@ -49,7 +48,7 @@ public class InlineMocks {
      * 
      * This is usually GREAT - means really helpful error messages.
      * 
-     * Unfortunately this means you ALWAYS have to initialize mocks in separate
+     * Unfortunately this means you have to initialize mocks in separate
      * statements, as below:
      */
     final Cow mockCow2 = mock(Cow.class);

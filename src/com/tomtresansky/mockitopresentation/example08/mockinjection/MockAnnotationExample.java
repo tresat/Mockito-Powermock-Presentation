@@ -1,4 +1,4 @@
-package com.tomtresansky.mockitopresentation.mockinjection;
+package com.tomtresansky.mockitopresentation.example08.mockinjection;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

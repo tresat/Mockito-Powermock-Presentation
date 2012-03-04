@@ -52,6 +52,42 @@ public class StubbingWithCallbacks {
     // Proviso: remember, use Answers SPARINGLY, might be a code smell that you're trying to test too much at once
   }
 
+  // The bark method should cause output to be printed
+  interface ElectronicDog {
+    void printBark(); // a void method for which we want to stub side-effects
+  }
+
+  @Test
+  public void testStubbingrSideEffectsOfVoidMethod() {
+    final ElectronicDog mockDog = mock(ElectronicDog.class);
+
+    /*
+     * Syntax for stubbing void methods is a little different, since doing as
+     * per normal:
+     * 
+     * when(mock.voidMethod()).thenAnswer(answer);
+     * 
+     * would cause the compiler to complain that we're passing the result of a
+     * voidMethod() as an argument to another method.
+     * 
+     * Instead, have to use an alternate backwards syntax:
+     * doAnswer(answer).when(mock).voidMethod();
+     */
+    doAnswer(new Answer<Void>() {
+      @Override
+      public Void answer(final InvocationOnMock invocation) throws Throwable {
+        // Produce desired side-effect of printing
+        System.out.println("Woof!");
+
+        // We must return something compatible with "Void" to make the compiler happy
+        return null;
+      }
+    }).when(mockDog).printBark();
+
+    // Test that it works: should see side-effects printed to Console
+    mockDog.printBark();
+  }
+
   @Test
   public void exampleOfAnswerAbuse() {
     /*

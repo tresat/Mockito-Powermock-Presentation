@@ -57,7 +57,8 @@ public class BasicStubbing {
   public void testStubbingMultipleInvocations() {
     // Say we want to stub repeated calls to the same method: each returning different results
     @SuppressWarnings("unchecked")
-    final Stack<String> mockStack = mock(Stack.class);
+    final Stack<String> mockStack = mock(Stack.class, "Tom's Mock Stack"); 
+    // 2 argument override to mock() method allows us to name each mock, name displayed in errors, helpful for debugging tests
 
     // Naive approach:
     when(mockStack.pop()).thenReturn("head");
