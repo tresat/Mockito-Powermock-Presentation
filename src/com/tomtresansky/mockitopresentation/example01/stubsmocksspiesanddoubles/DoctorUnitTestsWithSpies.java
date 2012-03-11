@@ -58,14 +58,14 @@ public class DoctorUnitTestsWithSpies {
     public boolean isInfected(final Person p) {
       calls.add(new Call("isInfected", p));
 
-      return false; // stub implementation always returns false
+      return false; // never infected
     }
 
     @Override
     public boolean isBreathing(final Person p) {
       calls.add(new Call("isBreathing", p));
 
-      return true; // stub implementation always returns true
+      return true; // always breathing
     }
   }
 
@@ -81,7 +81,7 @@ public class DoctorUnitTestsWithSpies {
   @Test
   public void testBadDoctorCanDiagnoseFever__AttemptUsingSpyMegameter() {
     // Create a bad doctor to test
-    final BadDoctor doctor = new BadDoctor();
+    final BadDoctor badDoctor = new BadDoctor();
 
     // Create a person with a fever to diagnose
     final Person feverishPerson = new Person(Person.NORMAL_TEMP + 10);
@@ -90,10 +90,22 @@ public class DoctorUnitTestsWithSpies {
     final SpyMegameter spyMegameter = new SpyMegameter();
 
     // And repeat our test again
-    Assert.assertTrue("Doctor should detect a fever!", doctor.checkForFever(feverishPerson, spyMegameter));
+    Assert.assertTrue(
+        "Doctor should detect a fever!",
+        badDoctor.checkForFever(feverishPerson, spyMegameter));
+
+    // ASSERTION PASSES!
 
     /*
-     * IT PASSES!
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
      * 
      * But since we have a spy we can check the record of calls made...
      */
@@ -105,7 +117,9 @@ public class DoctorUnitTestsWithSpies {
      * And even ensure that ONLY necessary methods were called.
      */
     for (final Call call : spyMegameter.getCalls()) {
-      Assert.assertTrue("Should only be measuring temperature with megameter!", "measureTemperature".equals(call.method));
+      Assert.assertTrue(
+          "Should only be measuring temperature with megameter!",
+          "measureTemperature".equals(call.method));
     }
   }
 }

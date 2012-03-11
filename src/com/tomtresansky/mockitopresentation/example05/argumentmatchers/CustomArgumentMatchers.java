@@ -27,7 +27,8 @@ public class CustomArgumentMatchers {
        */
       @Override
       public boolean matches(final Object argument) {
-        // Convert the argument to an int (assume this will only be called with non-null ints, for convenience)
+        // Convert the argument to an int (assume this will 
+        // only be called with non-null ints, for convenience)
         final int num = (Integer) argument;
 
         // Perform the divisibility test
@@ -44,7 +45,8 @@ public class CustomArgumentMatchers {
      * intThat(matcher), booleanThat(matcher), argThat(matcher) <-- use argThat
      * for objects.
      */
-    when(mockNumbersDivisibleBy5.contains(intThat(divisibleBy5))).thenReturn(true);
+    when(mockNumbersDivisibleBy5.contains(
+        intThat(divisibleBy5))).thenReturn(true);
 
     System.out.println("Mock set contains: ");
     System.out.println("3: " + mockNumbersDivisibleBy5.contains(3));

@@ -40,11 +40,14 @@ public final class MockAnnotationExample {
 
   @Test
   public void testGetRPMs() {
-    // We never initialized mockStartedEngine = mock(Engine.class); but it is setup for us.
+    // We never initialized mockStartedEngine = mock(Engine.class); 
+    // but it IS setup for us.
     when(mockStartedEngine.isRunning()).thenReturn(true);
     when(mockStartedEngine.getRPMs()).thenReturn(2000);
 
-    assertTrue("Engine should be running!", mockStartedEngine.isRunning());
-    assertTrue("A running engine should be revolving!", mockStartedEngine.getRPMs() > 0);
+    assertTrue("Engine should be running!",
+        mockStartedEngine.isRunning());
+    assertTrue("A running engine should be revolving!",
+        mockStartedEngine.getRPMs() > 0);
   }
 }

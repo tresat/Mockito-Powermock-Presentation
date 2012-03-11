@@ -29,16 +29,16 @@ public class CornerCases {
       // if we made it to here without an exception...is incorrect
       fail();
     } catch (final UnfueledException e) {
-      System.out.println("Unfueled rocket threw UnfueledException --- all is well!");
+      System.out.println("Unfueled rocket threw Exception --- all is well!");
     }
   }
 
   /*
-   * Another interface to test.
+   * Another type of rocket interface to test.
    */
   interface Rocket2 {
     /*
-     * Launch might throw an exception.
+     * This one has a launch method which might throw an exception.
      */
     void launch() throws ExplodeException;
   }
@@ -47,12 +47,16 @@ public class CornerCases {
   public void testStubbingVoidMethodWithExceptions() {
     final Rocket2 mockBadRocket = mock(Rocket2.class);
 
-    // How can we test our emergency response to an exploding rocket?  The below won't work on a void method.
+    // How can we test our emergency response to an exploding rocket?  
+    // The below won't work on a void method, since there is no
+    // result of mockBadRocket.launch() to pass as argument to when()
+    // and the compiler doesn't like this = ERROR
     // when(mockBadRocket.launch()).thenThrow(new ExplodeException());
 
-    // Problem is Mocito's when() call... which expects a value (the type of the result), void methods have no result...
+    // Problem is Mocito's when() call... expects a value 
+    // (the type of the result), void methods have no result...
 
-    // Syntax is a little stranger
+    // Syntax to stub this method throwing exceptions is a little stranger
     doThrow(new ExplodeException()).when(mockBadRocket).launch();
 
     try {

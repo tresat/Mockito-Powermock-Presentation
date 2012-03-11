@@ -1,4 +1,4 @@
-package com.tomtresansky.mockitopresentation.commonproblems;
+package com.tomtresansky.mockitopresentation.example11.commonproblems;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;

@@ -29,11 +29,13 @@ public class BasicVerification {
 
     // Normally we would do any required stubbing here...
 
-    // Normally we would now have the System Under Test actually utilize the mockWarehouse somehow here
+    // Normally we would now have the System Under Test actually 
+    // utilize the mockWarehouse somehow here.
     // Let's pretend it added a bicycle to our mock warehouse
     mockWarehouse.stock("bicycle");
 
-    // Note: even WITHOUT any stubbing, Mockito allows for verification of mocks
+    // Note: even WITHOUT any stubbing, Mockito allows for 
+    // verification of mocks
     verify(mockWarehouse).stock("bicycle");
 
     // We DIDN'T clear the warehouse, this should fail
@@ -48,9 +50,11 @@ public class BasicVerification {
     final Warehouse mockWarehouse = mock(Warehouse.class);
     mockWarehouse.stock("playstation");
 
-    verify(mockWarehouse).stock("playstation"); // yep, we stocked a playstation
+    verify(mockWarehouse).stock("playstation");
+    // yep, we stocked a playstation
 
-    verify(mockWarehouse).stock("xbox"); // no xbox was stocked = verification fails
+    verify(mockWarehouse).stock("xbox");
+    // no xbox was stocked = verification fails
   }
 
   @Test
@@ -61,7 +65,8 @@ public class BasicVerification {
     mockWarehouse.stock("hat");
     mockWarehouse.stock("hat");
 
-    // FAILS - there is an implicit assumption that verify means "verify it happened exactly ONCE"
+    // FAILS - there is an implicit assumption that verify 
+    // means "verify it happened exactly ONCE"
     verify(mockWarehouse).stock("hat");
 
     // FAILS - Identical to the above (times(1) is the default)
@@ -78,7 +83,8 @@ public class BasicVerification {
 
   @Test
   public void ensureOnlyExpectedCalls() {
-    // Often easier to say what you DON'T want called then to explicitly specify what you DO want called
+    // Often easier to say what you DON'T want called 
+    // then to explicitly specify what you DO want called
 
     // Setup mock warehouse - has pants
     final Warehouse mockClothingWarehouse = mock(Warehouse.class);

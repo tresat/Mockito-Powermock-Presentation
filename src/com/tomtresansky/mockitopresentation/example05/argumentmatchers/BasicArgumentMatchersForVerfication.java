@@ -25,7 +25,8 @@ public class BasicArgumentMatchersForVerfication {
 
     // Make some calls to the roster manager
     mockRosterManager.assignToTeam("Bob", 2);
-    mockRosterManager.assignToTeam("Robert", new Random().nextInt(4)); // We don't what skill Robert has been assigned using
+    mockRosterManager.assignToTeam("Robert", new Random().nextInt(4));
+    // We don't what skill Robert has been assigned using
 
     // Verifying Bob was assigned is easy
     verify(mockRosterManager).assignToTeam("Bob", 2);
@@ -41,7 +42,8 @@ public class BasicArgumentMatchersForVerfication {
     verify(mockRosterManager).assignToTeam("Robert", anyInt()); // attempt 1: FAILS
 
     // Have to use argument matchers for ALL arguments if used for ANY argumnet
-    //verify(mockRosterManager).assignToTeam(eq("Robert"), anyInt()); // attempt 2: SUCCESS
+    //verify(mockRosterManager).assignToTeam(eq("Robert"), anyInt()); 
+    // attempt 2: SUCCESS
   }
 
   @Test
@@ -77,9 +79,11 @@ public class BasicArgumentMatchersForVerfication {
      * Have to use isA to do type checking! anyX() methods are all equivalent to
      * any() and to anyObject(), just to avoid compile time type errors.
      */
-    verify(mockSet).contains(isA(Integer.class)); // to correctly ensure the method was called, AND WAS CALLED WITH AN INT
+    verify(mockSet).contains(isA(Integer.class));
+    // to correctly ensure the method was called, AND WAS CALLED WITH AN INT
 
-    // Conversely, if we checked if it was called with a String, this FAILS (which is what we want to happen!)
+    // Conversely, if we checked if it was called with a String, 
+    // this FAILS (which is what we want to happen!)
     verify(mockSet).contains(isA(String.class));
   }
 }

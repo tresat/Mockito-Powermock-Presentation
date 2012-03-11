@@ -31,10 +31,12 @@ public class StubbingWithCallbacks {
      * triplePlus() method returns an int, so generisized to Integer
      */
     final Answer<Integer> triplerAnswer = new Answer<Integer>() {
-      // Override the answer callback - will be invokes each time method is called on mock to calculate result
+      // Override the answer callback - will be invokes each time 
+      // method is called on mock to calculate result
       @Override
       public Integer answer(final InvocationOnMock invocation) throws Throwable {
-        // Need to extract the int triplePlus() was provided as argument (assuming non-nulls)
+        // Need to extract the int triplePlus() was 
+        // provided as argument (assuming non-nulls)
         final Object[] args = invocation.getArguments();
         final Integer x = (Integer) args[0];
 
@@ -42,14 +44,16 @@ public class StubbingWithCallbacks {
       }
     };
 
-    // Instead of supplying an int result as argument to then() call, we provide our Custom Answer implementation
+    // Instead of supplying an int result as argument to 
+    // then() call, we provide our Custom Answer implementation
     when(mockTripler.triplePlus(anyInt())).thenAnswer(triplerAnswer);
 
     System.out.println("Try it:");
     System.out.println("triplePlus(2): " + mockTripler.triplePlus(2));
     System.out.println("triplePlus(5): " + mockTripler.triplePlus(5));
 
-    // Proviso: remember, use Answers SPARINGLY, might be a code smell that you're trying to test too much at once
+    // Proviso: remember, use Answers SPARINGLY, might be 
+    // a code smell that you're trying to test too much at once
   }
 
   // The bark method should cause output to be printed
@@ -79,7 +83,8 @@ public class StubbingWithCallbacks {
         // Produce desired side-effect of printing
         System.out.println("Woof!");
 
-        // We must return something compatible with "Void" to make the compiler happy
+        // We must return something compatible with "Void" 
+        // to make the compiler happy
         return null;
       }
     }).when(mockDog).printBark();
@@ -105,13 +110,16 @@ public class StubbingWithCallbacks {
         final Object[] args = invocation.getArguments();
         final String argument = (String) args[0];
 
-        // And if that argument is contained in the list of synonyms, contains() returns true
+        // And if that argument is contained in the list of synonyms, 
+        // contains() returns true
         return Arrays.asList("big", "huge", "massive").contains(argument);
       }
     };
 
-    // Instead of supplying a boolean true or false as argument to then() call, we provide our Custom Answer implementation
-    when(mockSetOfWordsThatMeanBig.contains(anyString())).thenAnswer(meansBigAnswer);
+    // Instead of supplying a boolean true or false as argument 
+    // to then() call, we provide our Custom Answer implementation
+    when(mockSetOfWordsThatMeanBig.contains(
+        anyString())).thenAnswer(meansBigAnswer);
 
     System.out.println("Try some words:");
     System.out.println("big: " + mockSetOfWordsThatMeanBig.contains("big"));
@@ -134,12 +142,14 @@ public class StubbingWithCallbacks {
         // Convert the argument to a String
         final String arg = (String) argument;
 
-        // And if that argument is contained in the list of synonyms, contains() returns true
+        // And if that argument is contained in the list of synonyms, 
+        // contains() returns true
         return Arrays.asList("big", "huge", "massive").contains(arg);
       }
     };
 
-    when(mockSetOfWordsThatMeanBig2.contains(argThat(meansBig))).thenReturn(true);
+    when(mockSetOfWordsThatMeanBig2.contains(
+        argThat(meansBig))).thenReturn(true);
 
     System.out.println("\nSame results with Matcher:");
     System.out.println("big: " + mockSetOfWordsThatMeanBig2.contains("big"));

@@ -38,9 +38,11 @@ public class InOrderVerifcation {
 
     // FAILS - we SHOULD HAVE stocked first
     //warehouseOrdering.verify(mockWarehouse).stock("boots");
-    //warehouseOrdering.verify(mockWarehouse).ship("boots"); // NOTE: it failed here - only verifies order of methods as needed
+    //warehouseOrdering.verify(mockWarehouse).ship("boots"); 
+    // NOTE: it failed on previous line - only verifies order as needed
 
-    // Also note: stocking loafers doesn't matter - only verifies order of methods checked on InOrder object
+    // Also note: stocking loafers doesn't matter - only verifies 
+    // order of methods checked on InOrder object
     // Could still check a method was called regardless of order
     verify(mockWarehouse).stock("loafers");
   }
@@ -60,7 +62,8 @@ public class InOrderVerifcation {
     warehouseOrdering.verify(mockWarehouse1).ship("bananas");
     warehouseOrdering.verify(mockWarehouse2).stock("bananas");
 
-    // But what if warehouse 2 stocks an item before it is shipped from warehouse 1?
+    // But what if warehouse 2 stocks an item before it is shipped
+    // from warehouse 1?
     mockWarehouse1.stock("apples");
     mockWarehouse2.stock("apples");
     mockWarehouse1.ship("apples");

@@ -25,12 +25,12 @@ public class DoctorUnitTestsWithMocks {
 
     @Override
     public boolean isInfected(final Person p) {
-      return false; // stub implementation always returns false
+      return false; // never infected
     }
 
     @Override
     public boolean isBreathing(final Person p) {
-      return true; // stub implementation always returns true
+      return true; // always breathing
     }
   };
 
@@ -43,7 +43,9 @@ public class DoctorUnitTestsWithMocks {
     final Person feverishPerson = new Person(Person.NORMAL_TEMP + 10);
 
     // And repeat our original test
-    Assert.assertTrue("Doctor should detect a fever!", doctor.checkForFever(feverishPerson, new StubMegameter()));
+    Assert.assertTrue(
+        "Doctor should detect a fever!",
+        doctor.checkForFever(feverishPerson, new StubMegameter()));
 
     /*
      * Problems?
@@ -65,20 +67,22 @@ public class DoctorUnitTestsWithMocks {
    */
   class BadDoctor extends Doctor {
     public boolean checkForFever(final Person p, final Megameter m) {
-      return m.isBreathing(p);
+      return m.isBreathing(p); // WRONG USE OF MEGAMETER, DOC!
     }
   }
 
   @Test
   public void testBadDoctorCanDiagnoseFever__AttemptUsingStubMegameter() {
     // Create a BAD doctor to test
-    final BadDoctor doctor = new BadDoctor();
+    final BadDoctor badDoctor = new BadDoctor();
 
     // Create a person with a fever to diagnose
     final Person feverishPerson = new Person(Person.NORMAL_TEMP + 10);
 
     // And repeat our test again re-using the Stub Megameter
-    Assert.assertTrue("Doctor should detect a fever!", doctor.checkForFever(feverishPerson, new StubMegameter()));
+    Assert.assertTrue(
+        "Doctor should detect a fever!",
+        badDoctor.checkForFever(feverishPerson, new StubMegameter()));
 
     /*
      * IT PASSES!
@@ -143,7 +147,7 @@ public class DoctorUnitTestsWithMocks {
       if (!canCheckBreathing) {
         throw new RuntimeException("Shouldn't be checking breathing!");
       } else {
-        return false; // never breathing
+        return true; // always breathing
       }
     }
   }
@@ -161,15 +165,11 @@ public class DoctorUnitTestsWithMocks {
     mockMegameter.setCanMeasureTemparature(true);
 
     // Test our good doctor using the mock megameter
-    Assert.assertTrue("Doctor should detect a fever!", goodDoctor.checkForFever(feverishPerson, mockMegameter));
+    Assert.assertTrue(
+        "Doctor should detect a fever!",
+        goodDoctor.checkForFever(feverishPerson, mockMegameter));
 
     // IT PASSES: we only called appropriate method on the megameter
-
-    // Now try testing a BAD doctor
-    final BadDoctor badDoctor = new BadDoctor();
-
-    // Run the same test with our BAD doctor
-    //Assert.assertTrue("Doctor should detect a fever!", badDoctor.checkForFever(feverishPerson, mockMegameter));
 
     /*
      * 
@@ -179,6 +179,17 @@ public class DoctorUnitTestsWithMocks {
      * 
      * 
      * 
+     * 
+     * Now try testing a BAD doctor
+     */
+    final BadDoctor badDoctor = new BadDoctor();
+
+    // Run the same test with our BAD doctor
+    //    Assert.assertTrue(
+    //            "Doctor should detect a fever!",
+    //            badDoctor.checkForFever(feverishPerson, mockMegameter));
+
+    /*
      * The MOCK ensures that only expected functionality of dependent objects is
      * used!
      * 

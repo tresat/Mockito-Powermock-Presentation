@@ -1,4 +1,4 @@
-package com.tomtresansky.mockitopresentation.commonproblems;
+package com.tomtresansky.mockitopresentation.example11.commonproblems;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -58,13 +58,17 @@ public class MixedArgumentMatchers {
     when(mockBreeder.breed(fido, rex, 3)).thenReturn(puppies);
     Assert.assertEquals(puppies, mockBreeder.breed(fido, rex, 3));
 
-    // Set up a mock using argument matchers: ANY DOG NAMED SPOT + ANY OTHER DOG and ANY NUMBER OF PUPPIES - works fine
-    when(mockBreeder.breed(eq(new Dog("Spot", null)), any(Dog.class), anyInt())).thenReturn(puppies);
+    // Set up a mock using argument matchers: ANY DOG NAMED SPOT + ANY 
+    // OTHER DOG and ANY NUMBER OF PUPPIES - works fine
+    when(mockBreeder.breed(
+        eq(new Dog("Spot", null)), any(Dog.class), anyInt())).thenReturn(puppies);
     Assert.assertEquals(puppies, mockBreeder.breed(spot1, fluffy, 2));
     Assert.assertEquals(puppies, mockBreeder.breed(spot2, fluffy, 7));
 
-    // Now set up a mock using a mix of values and argument matchers: ANY DOG NAMED SPOT + ANY OTHER DOG and 2 PUPPIES
-    when(mockBreeder.breed(eq(new Dog("Spot", null)), any(Dog.class), 2)).thenReturn(puppies); // <----- FAILS with InvalidUseOfMatchersException
+    // Now set up a mock using a mix of values and argument matchers: ANY 
+    // DOG NAMED SPOT + ANY OTHER DOG and 2 PUPPIES
+    when(mockBreeder.breed(
+        eq(new Dog("Spot", null)), any(Dog.class), 2)).thenReturn(puppies); // <----- FAILS with InvalidUseOfMatchersException
 
     /*
      * You can't combine eq() and any(), which are Argument Matchers, with

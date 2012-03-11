@@ -19,7 +19,9 @@ public class DoctorUnitTestsWithStubs {
      * 
      * But the actual thermometer might break!
      */
-    Assert.assertTrue("Doctor should detect a fever!", doctor.checkForFever(feverishPerson, new ActualThermometer()));
+    Assert.assertTrue(
+        "Doctor should detect a fever!",
+        doctor.checkForFever(feverishPerson, new ActualThermometer()));
 
     // NOTHING is worse than a test which passes MOST of the time!
   }
@@ -47,13 +49,28 @@ public class DoctorUnitTestsWithStubs {
       }
     };
 
-    Assert.assertTrue("Doctor should detect a fever!", doctor.checkForFever(feverishPerson, stubThermometer));
+    Assert.assertTrue(
+        "Doctor should detect a fever!",
+        doctor.checkForFever(feverishPerson, stubThermometer));
 
-    // But now we want to test that doctor doesn't mis-diagnose a healthy patient as well
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * But now we want to test that doctor doesn't mis-diagnose a healthy
+     * patient as well...
+     */
     final Person healthyPerson = new Person(Person.NORMAL_TEMP);
 
     // WON'T WORK, STUB IS INAPPROPRIATE
-    //Assert.assertFalse("Patient should be fine!", doctor.checkForFever(healthyPerson, stubThermometer));
+    //    Assert.assertFalse(
+    //        "Patient should be fine!",
+    //        doctor.checkForFever(healthyPerson, stubThermometer));
 
     /*
      * 
@@ -74,7 +91,8 @@ public class DoctorUnitTestsWithStubs {
      * Need to make a 2nd stub...
      */
 
-    // THIS STUB WILL ALWAYS REPORT THE NORMAL TEMP, AND SHOULD ALLOW US TO RUN A NEGATIVE TEST
+    // THIS STUB WILL ALWAYS REPORT THE NORMAL TEMP, 
+    // AND SHOULD ALLOW US TO RUN A NEGATIVE TEST
     //    final Thermometer stubThermometer2 = new Thermometer() {
     //      @Override
     //      public double measureTemperature(final Person p) {
@@ -82,6 +100,8 @@ public class DoctorUnitTestsWithStubs {
     //      }
     //    };
     //
-    //    Assert.assertFalse("Patient should be fine!", doctor.checkForFever(healthyPerson, stubThermometer2));
+    //    Assert.assertFalse(
+    //            "Patient should be fine!",
+    //            doctor.checkForFever(healthyPerson, stubThermometer2));
   }
 }

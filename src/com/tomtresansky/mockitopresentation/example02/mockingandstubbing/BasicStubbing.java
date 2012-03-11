@@ -25,18 +25,22 @@ public class BasicStubbing {
     // Now there is a chicken in the list
     System.out.println("Value after stubbing get(0) call: " + mockList.get(0));
 
-    // Note that none of the semantics of list have been preserved: for example, we can "put" something in position 4
+    // Note that none of the semantics of list have been preserved: 
+    // for example, we can "put" something in position 4
     when(mockList.get(4)).thenReturn("ostrich");
 
-    // This is an odd list...BECAUSE list semantics are NOT preserved, so we can have 0th and 4th items without
+    // This is an odd list...BECAUSE list semantics are NOT preserved, 
+    // so we can have 0th and 4th items without
     // 1st, 2nd and 3rd values, which will still return default value of null
     // Note that list[0] is still chicken
     for (int i = 0; i <= 4; i++) {
       System.out.println("List[" + i + "] = " + mockList.get(i));
     }
 
-    // Once again: you only get results you've specified...the MOCK list doesn't know anything you haven't told it
-    // we haven't stubbed size() calls, so it returns the DEFAULT numeric value of 0
+    // Once again: you only get results you've specified...the MOCK list 
+    // doesn't know anything you haven't told it
+    // we haven't stubbed size() calls, so it returns the DEFAULT 
+    // numeric value of 0
     System.out.println("List has " + mockList.size() + " items.");
   }
 
@@ -50,15 +54,19 @@ public class BasicStubbing {
     //mockList.add("turtle"); // generics are preserved in mock
 
     when(mockList.get(0)).thenReturn(2); // okay
-    //when(mockList.get(1)).thenReturn("frog"); // generics say no when stubbing, too
+
+    // generics say no when stubbing, too, this line will ERROR
+    //when(mockList.get(1)).thenReturn("frog"); 
   }
 
   @Test
   public void testStubbingMultipleInvocations() {
-    // Say we want to stub repeated calls to the same method: each returning different results
+    // Say we want to stub repeated calls to the same method: 
+    // each returning different results
     @SuppressWarnings("unchecked")
-    final Stack<String> mockStack = mock(Stack.class, "Tom's Mock Stack"); 
-    // 2 argument override to mock() method allows us to name each mock, name displayed in errors, helpful for debugging tests
+    final Stack<String> mockStack = mock(Stack.class, "Tom's Mock Stack");
+    // 2 argument override to mock() method allows us to name each mock, 
+    // name displayed in errors, helpful for debugging tests
 
     // Naive approach:
     when(mockStack.pop()).thenReturn("head");
@@ -72,13 +80,15 @@ public class BasicStubbing {
       System.out.println(mockStack.pop());
     }
 
-    // Mockito only remembers LAST stubbed result...so how to mock a Stack keeping to AAA?
+    // Mockito only remembers LAST stubbed result...so how to 
+    // mock a Stack keeping to AAA?
 
     // Let's try again...
     @SuppressWarnings("unchecked")
     final Stack<String> mockStack2 = mock(Stack.class);
 
-    // Var-args call to then return tells mockito to keep track of various results
+    // Var-args call to then return tells mockito to keep track of 
+    // various results
     when(mockStack2.pop()).thenReturn("head", "neck", "shoulders", "chest");
 
     // Proof:
