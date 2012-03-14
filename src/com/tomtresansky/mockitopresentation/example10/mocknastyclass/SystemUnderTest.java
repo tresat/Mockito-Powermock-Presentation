@@ -11,19 +11,19 @@ final class SystemUnderTest extends BaseSystemUnderTest {
 
   static {
     System.out.println(
-        "SystemUnderTest:static initializer accessing extenal resources!");
+        "SystemUnderTest:static initializer accessing external resources!");
   }
 
   private final Collaborator1 memberCollaborator = new Collaborator1();
 
   {
     System.out.println(
-        "SystemUnderTest:instance initializer() accessing extenal resources!");
+        "SystemUnderTest:instance initializer() accessing external resources!");
   }
 
   public SystemUnderTest() {
     System.out.println(
-        "SystemUnderTest:SystemUnderTest() accessing extenal resources!");
+        "SystemUnderTest:SystemUnderTest() accessing external resources!");
   }
 
   public int doSomething(final Collaborator3 collaborator3) {
@@ -41,7 +41,7 @@ final class SystemUnderTest extends BaseSystemUnderTest {
 class BaseSystemUnderTest {
   public BaseSystemUnderTest() {
     System.out.println(
-        "BaseSystemUnderTest:BaseSystemUnderTest() accessing extenal resources!");
+        "BaseSystemUnderTest:BaseSystemUnderTest() accessing external resources!");
   }
 }
 
@@ -51,12 +51,12 @@ class BaseSystemUnderTest {
 class Collaborator1 {
   public Collaborator1() {
     System.out.println(
-        "Collaborator1:Collaborator1() accessing extenal resources!");
+        "Collaborator1:Collaborator1() accessing external resources!");
   }
 
   public int getValue() {
     System.out.println(
-        "Collaborator1:getValue() accessing extenal resources!");
+        "Collaborator1:getValue() accessing external resources!");
     return 1;
   }
 }
@@ -67,7 +67,7 @@ class Collaborator1 {
 class Collaborator2 {
   public static int getValueStatic() {
     System.out.println(
-        "Collaborator2:getValueStatic() accessing extenal resources!");
+        "Collaborator2:getValueStatic() accessing external resources!");
     return 1;
   }
 }
@@ -78,7 +78,7 @@ class Collaborator2 {
 final class Collaborator3 {
   public final int getValueFinal() {
     System.out.println(
-        "Collaborator3:getValueFinal() accessing extenal resources!");
+        "Collaborator3:getValueFinal() accessing external resources!");
     return 1;
   }
 }

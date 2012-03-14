@@ -23,10 +23,14 @@ import org.powermock.reflect.Whitebox;
  * demonstrate all have been stubbed properly.
  */
 @RunWith(PowerMockRunner.class)
-@SuppressStaticInitializationFor("mockitopresentation.mocknastyclass.SystemUnderTest")
+@SuppressStaticInitializationFor("com.tomtresansky.mockitopresentation.example10.mocknastyclass.SystemUnderTest")
 @PrepareForTest({ Collaborator1.class, Collaborator2.class,
     Collaborator3.class, BaseSystemUnderTest.class, SystemUnderTest.class })
 public final class DemonstrateTestingWithPowerMock {
+  /*
+   * We'll use this method to create an instance of the SUT, with all
+   * collaborators mocked using PowerMock.
+   */
   private static SystemUnderTest getNewInstanceToTest() {
     // Mock the static method call on collaborator 2
     PowerMockito.mockStatic(Collaborator2.class);
@@ -65,7 +69,7 @@ public final class DemonstrateTestingWithPowerMock {
 
   @Test
   public void testSystemUnderTestDoSomething() {
-    // Get our instance to test
+    // Get our instance to test with mocked collaborators
     final SystemUnderTest systemUnderTest = getNewInstanceToTest();
 
     // Mock an instance of collaborator3 and stub its final method to 
@@ -73,7 +77,16 @@ public final class DemonstrateTestingWithPowerMock {
     final Collaborator3 mockCollaborator3 = PowerMockito.mock(Collaborator3.class);
     when(mockCollaborator3.getValueFinal()).thenReturn(1);
 
-    // And call the method on it with no console output
+    /*
+     * And call the method on it with no console output.
+     * 
+     * If any of the methods we call are actual implementations, other print
+     * statements will appear on the console.
+     * 
+     * If any of the mocks we've stubstituted aren't stubbed properly, they will
+     * return the default value of 0. We want the result of doSomething to be 5,
+     * to demonstrate all have been stubbed properly.
+     */
     System.out.println(
         "Resulting value: " + systemUnderTest.doSomething(mockCollaborator3));
   }
