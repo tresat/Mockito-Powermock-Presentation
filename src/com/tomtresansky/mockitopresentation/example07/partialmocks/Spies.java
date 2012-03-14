@@ -25,7 +25,9 @@ public class Spies {
     // Actual method calls work as expected
     System.out.println(
         "Before adding Venus, Contains Venus?: " + spyList.contains("Venus"));
+
     spyList.add("Venus");
+
     System.out.println(
         "After adding Venus, Contains Venus?: " + spyList.contains("Venus"));
 

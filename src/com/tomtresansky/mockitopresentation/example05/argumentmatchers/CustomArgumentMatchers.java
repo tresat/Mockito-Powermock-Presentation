@@ -12,7 +12,7 @@ public class CustomArgumentMatchers {
   @Test
   public void testCustomMatcher() {
     @SuppressWarnings("unchecked")
-    final Set<Integer> mockNumbersDivisibleBy5 = mock(Set.class);
+    final Set<Integer> mockNumsDivisibleBy5 = mock(Set.class);
 
     /*
      * We want to be able to call .contains() method on this set with ANY
@@ -45,13 +45,13 @@ public class CustomArgumentMatchers {
      * intThat(matcher), booleanThat(matcher), argThat(matcher) <-- use argThat
      * for objects.
      */
-    when(mockNumbersDivisibleBy5.contains(
-        intThat(divisibleBy5))).thenReturn(true);
+    when(mockNumsDivisibleBy5.contains(intThat(divisibleBy5))).thenReturn(true);
 
     System.out.println("Mock set contains: ");
-    System.out.println("3: " + mockNumbersDivisibleBy5.contains(3));
-    System.out.println("5: " + mockNumbersDivisibleBy5.contains(5));
-    System.out.println("17: " + mockNumbersDivisibleBy5.contains(17));
-    System.out.println("25: " + mockNumbersDivisibleBy5.contains(25));
+    System.out.println("3: " + mockNumsDivisibleBy5.contains(3));
+    System.out.println("5: " + mockNumsDivisibleBy5.contains(5));
+    System.out.println("12: " + mockNumsDivisibleBy5.contains(12));
+    System.out.println("15: " + mockNumsDivisibleBy5.contains(15));
+    System.out.println("25: " + mockNumsDivisibleBy5.contains(25));
   }
 }

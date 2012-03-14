@@ -20,6 +20,7 @@ public class CornerCases {
   public void testMethodThrowingExceptions() {
     final Rocket mockUnfueledRocket = mock(Rocket.class);
 
+    // instead of thenReturn(value) we use thenThrow(exception)
     when(mockUnfueledRocket.readyToLaunch()).thenThrow(new UnfueledException());
 
     try {
@@ -29,7 +30,8 @@ public class CornerCases {
       // if we made it to here without an exception...is incorrect
       fail();
     } catch (final UnfueledException e) {
-      System.out.println("Unfueled rocket threw Exception --- all is well!");
+      System.out.println(
+          "Unfueled rocket threw UnfueledException --- all is well!");
     }
   }
 
@@ -65,7 +67,8 @@ public class CornerCases {
       // if we made it to here without an exception...is incorrect
       fail();
     } catch (final ExplodeException e) {
-      System.out.println("The rocket blew up --- call the Fire Dept.!");
+      System.out.println(
+          "The rocket blew up (as expected) --- call the Fire Dept.!");
     }
   }
 }

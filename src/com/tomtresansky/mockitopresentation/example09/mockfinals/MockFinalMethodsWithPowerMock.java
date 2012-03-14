@@ -20,7 +20,8 @@ class Calculator2 {
     } catch (final InterruptedException e) {
       // won't be interrupted
     }
-    return 2; // close enough
+
+    return 2; // close enough, give up
   }
 }
 
@@ -50,6 +51,6 @@ public class MockFinalMethodsWithPowerMock {
     when(mockCalculator.computeE()).thenReturn(Math.E);
 
     // And we get a quick and accurate stubbed calculation from our mock...
-    System.out.println("Pi: " + mockCalculator.computeE());
+    System.out.println("E: " + mockCalculator.computeE());
   }
 }

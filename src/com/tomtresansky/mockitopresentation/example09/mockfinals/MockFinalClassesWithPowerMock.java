@@ -19,7 +19,8 @@ final class Calculator {
     } catch (final InterruptedException e) {
       // won't be interrupted
     }
-    return 3; // close enough
+
+    return 3; // close enough, give up
   }
 }
 
@@ -34,7 +35,7 @@ final class Calculator {
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Calculator.class)
-public class MockFinalsWithPowerMock {
+public class MockFinalClassesWithPowerMock {
   @Test
   public void testMockFinalClassesWithPowerMock() {
     /*

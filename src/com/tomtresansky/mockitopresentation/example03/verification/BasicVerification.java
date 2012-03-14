@@ -38,8 +38,8 @@ public class BasicVerification {
     // verification of mocks
     verify(mockWarehouse).stock("bicycle");
 
-    // We DIDN'T clear the warehouse, this should fail
-    verify(mockWarehouse).clear();
+    // We DIDN'T clear the warehouse, this should FAIL the test
+    // verify(mockWarehouse).clear();
 
     // Check out the JUnit Failure message!
   }
@@ -48,13 +48,15 @@ public class BasicVerification {
   public void testArgumentVerification() {
     // Setup mock warehouse
     final Warehouse mockWarehouse = mock(Warehouse.class);
+
+    // Stock a playstation by calling a method on the mock
     mockWarehouse.stock("playstation");
 
-    verify(mockWarehouse).stock("playstation");
-    // yep, we stocked a playstation
-
+    // no xbox was stocked = verification FAILS
     verify(mockWarehouse).stock("xbox");
-    // no xbox was stocked = verification fails
+
+    // playstation verification would SUCCEED
+    //verify(mockWarehouse).stock("playstation");
   }
 
   @Test
@@ -86,18 +88,18 @@ public class BasicVerification {
     // Often easier to say what you DON'T want called 
     // then to explicitly specify what you DO want called
 
-    // Setup mock warehouse - has pants
-    final Warehouse mockClothingWarehouse = mock(Warehouse.class);
-    mockClothingWarehouse.stock("pants");
+    // Setup pants warehouse - has pants
+    final Warehouse mockPantsWarehouse = mock(Warehouse.class);
+    mockPantsWarehouse.stock("pants");
 
     // This is a clothing warehouse --- ensure no food was added 
-    verify(mockClothingWarehouse, never()).stock("orange");
+    verify(mockPantsWarehouse, never()).stock("orange");
 
     // Check that ONLY pants were added
-    verify(mockClothingWarehouse, only()).stock("pants");
+    verify(mockPantsWarehouse, only()).stock("pants");
 
     // Can still act on mock AFTER verification
-    mockClothingWarehouse.ship("pants");
+    mockPantsWarehouse.ship("pants");
 
     // But now the ONLY verification will FAIL
     // verify(mockClothingWarehouse, only()).stock("pants");

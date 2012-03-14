@@ -70,6 +70,18 @@ public class BasicArgumentMatchersForVerfication {
     verify(mockSet).contains(anyString()); // SUCCESS!?!?! It shouldn't succeed?
 
     /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
      * From the anyX() family of methods javadoc:
      * 
      * This method doesn't do any type checks, it is only there to avoid casting
@@ -84,6 +96,6 @@ public class BasicArgumentMatchersForVerfication {
 
     // Conversely, if we checked if it was called with a String, 
     // this FAILS (which is what we want to happen!)
-    verify(mockSet).contains(isA(String.class));
+    // verify(mockSet).contains(isA(String.class));
   }
 }

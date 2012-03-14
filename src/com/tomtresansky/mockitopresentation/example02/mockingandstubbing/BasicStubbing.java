@@ -51,7 +51,7 @@ public class BasicStubbing {
     final List<Integer> mockList = mock(List.class);
 
     mockList.add(5); // okay
-    //mockList.add("turtle"); // generics are preserved in mock
+    //mockList.add("turtle"); // ERRORS - generics are preserved in mock
 
     when(mockList.get(0)).thenReturn(2); // okay
 
@@ -98,6 +98,7 @@ public class BasicStubbing {
     }
 
     // After exhausting the supplied var-args, stuck on last result
-    System.out.println("\nOn the 4th pop: " + mockStack2.pop());
+    System.out.println("\nOn the 5th plus pop: " +
+        mockStack2.pop() + " " + mockStack2.pop() + " " + mockStack2.pop());
   }
 }

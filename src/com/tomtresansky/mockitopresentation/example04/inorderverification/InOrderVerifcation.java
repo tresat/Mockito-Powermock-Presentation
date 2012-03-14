@@ -18,33 +18,44 @@ public class InOrderVerifcation {
 
   @Test
   public void testInOrderVerification() {
-    final Warehouse mockWarehouse = mock(Warehouse.class);
+    final Warehouse mockShoeWarehouse = mock(Warehouse.class);
 
     // Add some sneakers
-    mockWarehouse.stock("sneakers");
+    mockShoeWarehouse.stock("sneakers");
 
     // And ship them
-    mockWarehouse.ship("sneakers");
+    mockShoeWarehouse.ship("sneakers");
 
     // We want to verify we've shipped only AFTER we've stocked
-    final InOrder warehouseOrdering = inOrder(mockWarehouse);
-    warehouseOrdering.verify(mockWarehouse).stock("sneakers");
-    warehouseOrdering.verify(mockWarehouse).ship("sneakers");
+    final InOrder warehouseOrdering = inOrder(mockShoeWarehouse);
+    warehouseOrdering.verify(mockShoeWarehouse).stock("sneakers");
+    warehouseOrdering.verify(mockShoeWarehouse).ship("sneakers");
 
-    // What if we shipped boots PRIOR to stocking?
-    mockWarehouse.ship("boots");
-    mockWarehouse.stock("loafers"); // extraneous
-    mockWarehouse.stock("boots");
-
-    // FAILS - we SHOULD HAVE stocked first
-    //warehouseOrdering.verify(mockWarehouse).stock("boots");
-    //warehouseOrdering.verify(mockWarehouse).ship("boots"); 
-    // NOTE: it failed on previous line - only verifies order as needed
-
-    // Also note: stocking loafers doesn't matter - only verifies 
-    // order of methods checked on InOrder object
-    // Could still check a method was called regardless of order
-    verify(mockWarehouse).stock("loafers");
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * What if we shipped boots PRIOR to stocking?
+     */
+    //    mockShoeWarehouse.ship("boots");
+    //    mockShoeWarehouse.stock("loafers"); // extraneous
+    //    mockShoeWarehouse.stock("boots");
+    //
+    //    // FAILS - we SHOULD HAVE stocked first
+    //    warehouseOrdering.verify(mockShoeWarehouse).stock("boots");
+    //    warehouseOrdering.verify(mockShoeWarehouse).ship("boots");
+    //    // NOTE: it failed on previous line - only verifies order as needed
+    //
+    //    // Also note: stocking loafers doesn't matter - only verifies 
+    //    // order of methods checked on InOrder object
+    //    // Could still check a method was called regardless of order
+    //    verify(mockShoeWarehouse).stock("loafers");
   }
 
   @Test
@@ -62,15 +73,24 @@ public class InOrderVerifcation {
     warehouseOrdering.verify(mockWarehouse1).ship("bananas");
     warehouseOrdering.verify(mockWarehouse2).stock("bananas");
 
-    // But what if warehouse 2 stocks an item before it is shipped
-    // from warehouse 1?
-    mockWarehouse1.stock("apples");
-    mockWarehouse2.stock("apples");
-    mockWarehouse1.ship("apples");
-
-    // FAILS: we stocked in 2 before 1 shipped!
-    //warehouseOrdering.verify(mockWarehouse1).ship("apples");
-    //warehouseOrdering.verify(mockWarehouse2).stock("apples");
+    //    /*
+    //     * 
+    //     * 
+    //     * 
+    //     * 
+    //     * 
+    //     * 
+    //     * 
+    //     * 
+    //     * But what if warehouse 2 stocks an item before it is shipped from 1?
+    //     */
+    //    mockWarehouse1.stock("apples");
+    //    mockWarehouse2.stock("apples");
+    //    mockWarehouse1.ship("apples");
+    //
+    //    // FAILS: we stocked in 2 before 1 shipped!
+    //    warehouseOrdering.verify(mockWarehouse1).ship("apples");
+    //    warehouseOrdering.verify(mockWarehouse2).stock("apples");
   }
 
   @SuppressWarnings("serial")

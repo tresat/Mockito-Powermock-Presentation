@@ -4,6 +4,7 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.Map;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -14,17 +15,34 @@ public class BasicArgumentMatchersForStubbing {
     @SuppressWarnings("unchecked")
     final Map<Integer, String> mockNumbers = mock(Map.class);
 
+    // If we call an unstubbed method, we get default result
+    System.out.println("Before setting up stubbing:");
+    System.out.println("2: " + mockNumbers.get(2));
+
+    // If we stub JUST a single argument method, then default eq() matcher will be used
+    when(mockNumbers.get(2)).thenReturn("This is two!");
+    // EQUIVALENT, eq() is the default implied matcher
+    // when(mockNumbers.get(eq(2))).thenReturn("This is two!");
+
+    // ...we get default result for any other calls
+    System.out.println("\nAfter stubbing 2:");
+    System.out.println("1: " + mockNumbers.get(1));
+    System.out.println("2: " + mockNumbers.get(2));
+    System.out.println("5: " + mockNumbers.get(5));
+
     // Here we'll use an argument matchers to specify what happens when
-    // we request a number
+    // we request any number 
     when(mockNumbers.get(anyInt())).thenReturn("Here is a whole number.");
 
     // Without argument matchers, we would get DEFAULT value of null 
     // as the result for all of these .get() calls
-    System.out.println("With only anyInt() specified:");
-    System.out.println("2: " + mockNumbers.get(2));
+    System.out.println("\nWith only anyInt() specified:");
     System.out.println("17: " + mockNumbers.get(17));
     System.out.println("239: " + mockNumbers.get(239));
     System.out.println("0: " + mockNumbers.get(0));
+    final int rand = new Random().nextInt(1000);
+    System.out.println(
+        "Here's a random number we couldn't have expected " + rand + " : " + mockNumbers.get(rand));
 
     // Now we'll override some specific values - must do this 
     //  AFTER specifying anyInt() (more specific matchers go LAST)
@@ -51,12 +69,16 @@ public class BasicArgumentMatchersForStubbing {
     final RosterManager mockRosterManager = mock(RosterManager.class);
 
     // Set up some matchers for our roster manager
+    // names ending in Jones go to Jones team
+    // any name remotely like Smith goes to Smiths team
+    // Margie Dunn goes to Jones team
     when(mockRosterManager.assignToTeam(
         endsWith("Jones"), anyInt())).thenReturn("The Jones Team");
     when(mockRosterManager.assignToTeam(
         matches(".*Sm.*th.*"), anyInt())).thenReturn("The Smiths Team");
     when(mockRosterManager.assignToTeam(
         eq("Margie Dunn"), anyInt())).thenReturn("The Jones Team");
+
     // More specific matchers are added last: 
     // any player with skill level 3 should match High Skill Team
     when(mockRosterManager.assignToTeam(

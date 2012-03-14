@@ -15,11 +15,11 @@ import org.junit.Test;
 public final class DemonstrateDefaultBehaviour {
   @Test
   public void testDoSomething() {
-    // Create a collaborator object needed as an argument
-    final Collaborator3 collaborator3 = new Collaborator3();
-
     // Create the instance of our system to test
     final SystemUnderTest systemUnderTest = new SystemUnderTest();
+
+    // Create a collaborator object needed as an argument
+    final Collaborator3 collaborator3 = new Collaborator3();
 
     // And call the method on it - at this point there will 
     // be LOTS of console output, signifying unwanted access to external resources
