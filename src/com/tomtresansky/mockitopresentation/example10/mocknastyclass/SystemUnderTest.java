@@ -26,6 +26,7 @@ final class SystemUnderTest extends BaseSystemUnderTest {
         "SystemUnderTest:SystemUnderTest() accessing external resources!");
   }
 
+  // We want to test this method!
   public int doSomething(final Collaborator3 collaborator3) {
     return 1
         + collaborator3.getValueFinal()

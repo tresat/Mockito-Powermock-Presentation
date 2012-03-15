@@ -32,8 +32,8 @@ public class BasicArgumentMatchersForVerfication {
     verify(mockRosterManager).assignToTeam("Bob", 2);
 
     /*
-     * But how do we verify if Bob was added if we don't know what skill he was
-     * called with?
+     * But how do we verify if Robert was added if we don't know what skill he
+     * was called with?
      * 
      * ...
      * 
@@ -41,16 +41,18 @@ public class BasicArgumentMatchersForVerfication {
      */
     verify(mockRosterManager).assignToTeam("Robert", anyInt()); // attempt 1: FAILS
 
-    // Have to use argument matchers for ALL arguments if used for ANY argumnet
+    // Have to use argument matchers for ALL arguments if used for ANY argument
     //verify(mockRosterManager).assignToTeam(eq("Robert"), anyInt()); 
     // attempt 2: SUCCESS
+
+    // Use of matchers which DON'T match FAILS verification
+    //verify(mockRosterManager).assignToTeam(eq("James"), anyInt()); 
   }
 
   @Test
   public void testCallVerificationForArgumentTypes() {
     // Here is a set which could contain items of any type
-    @SuppressWarnings("unchecked")
-    final Set<String> mockSet = mock(Set.class);
+    final Set mockSet = mock(Set.class);
 
     // ... would normally stub here
 
@@ -88,8 +90,8 @@ public class BasicArgumentMatchersForVerfication {
      * in your code. This might however change (type checks could be added) in a
      * future major release.
      * 
-     * Have to use isA to do type checking! anyX() methods are all equivalent to
-     * any() and to anyObject(), just to avoid compile time type errors.
+     * Have to use isA() to do type checking! anyX() methods are all equivalent
+     * to any() and to anyObject(), just to avoid compile time type errors.
      */
     verify(mockSet).contains(isA(Integer.class));
     // to correctly ensure the method was called, AND WAS CALLED WITH AN INT
